@@ -7,9 +7,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+
 import org.glassfish.jersey.filter.LoggingFilter;
 import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.JerseyTestNg.ContainerPerClassTest;
 import org.glassfish.jersey.test.TestProperties;
 
@@ -68,12 +69,11 @@ public class RestAssuredDocsTest extends ContainerPerClassTest {
                           true));
   }
 
-  @Test
   public void examplePut() throws Exception {
     TestBean bean = new TestBean(1, "a message");
 
-    given().port(this.getPort())
-           .filter(documentationConfiguration(this.restDocumentation))
+    given().port(getPort())
+           .filter(documentationConfiguration(restDocumentation))
            .filter(document("example-put",
                             requestFields(
                                 fieldWithPath("id").description("The id"),
@@ -85,8 +85,8 @@ public class RestAssuredDocsTest extends ContainerPerClassTest {
                                     "The message")),
                             pathParameters(
                                 parameterWithName("id").description("The id"))))
-           .contentType("application/json")
-           .accept("application/json")
+           .contentType(APPLICATION_JSON)
+           .accept(APPLICATION_JSON)
            .content(mapper.writeValueAsString(bean))
            .put("/test/{id}", "1")
            .then()
@@ -98,12 +98,12 @@ public class RestAssuredDocsTest extends ContainerPerClassTest {
 
   @AfterMethod
   public void tearDown() {
-    this.restDocumentation.afterTest();
+    restDocumentation.afterTest();
   }
 
   @BeforeMethod
   public void setUp(Method method) {
-    this.restDocumentation.beforeTest(getClass(), method.getName());
+    restDocumentation.beforeTest(getClass(), method.getName());
   }
 
   public static class TestBean {
@@ -120,8 +120,8 @@ public class RestAssuredDocsTest extends ContainerPerClassTest {
 
 
   @Path("test")
-  @Produces("application/json")
-  @Consumes("application/json")
+  @Produces(APPLICATION_JSON)
+  @Consumes(APPLICATION_JSON)
   public static class TestResource {
 
     @PUT
