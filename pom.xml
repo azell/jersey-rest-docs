@@ -62,7 +62,7 @@
       <version>${jersey.version}</version>
     </dependency>
 
-    <!-- Compile dependencies -->
+    <!-- Test dependencies -->
     <dependency>
       <groupId>org.glassfish.jersey.test-framework.providers</groupId>
       <artifactId>jersey-test-framework-provider-jetty</artifactId>
