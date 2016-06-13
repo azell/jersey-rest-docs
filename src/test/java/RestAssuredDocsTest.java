@@ -43,9 +43,6 @@ import static com.jayway.restassured.RestAssured.given;
 /**
  * Stack Overflow http://stackoverflow.com/q/35068860/2587435
  *
- * Run this like any other JUnit test. The required dependencies are listed below. You will need
- * to add the Spring Snapshot repository, also listed below.
- *
  * Running the test should produces the following snippets in target/generated-snippets/example-put:
  *
  * - curl-request.adoc
